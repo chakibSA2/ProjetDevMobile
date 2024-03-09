@@ -1,13 +1,11 @@
 package com.example.controledelannepass
 
-import android.content.ContentValues.TAG
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private val Notes = mutableListOf<Note>()
     //On instancie l'adapter en tant que variable de l'activité pour l'utiliser dans les fonctions
     private lateinit var adapter: NoteAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,41 +23,37 @@ class MainActivity : AppCompatActivity() {
         val buttonAdd = findViewById<FloatingActionButton>(R.id.floatingActionButtonAddNote)
         val recycler = findViewById<RecyclerView>(R.id.recyclerMainActivity)
 
-        adapter = NoteAdapter(Notes) { position ->
+        //initialisation de l'adapter, on lui donne cet activité comme context
+        adapter = NoteAdapter(Notes, this) { position ->
             deleteNote(position)
         }
 
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(this)
 
-
         buttonAdd.setOnClickListener {
             //On affiche la consultation/modification de cette note
             val intent = Intent(this, NoteModificationActivity::class.java)
-
             startActivity(intent)
-            val id = intent.getStringExtra("ID")
-            val text = intent.getStringExtra("TEXT")
-
-            Log.d(TAG, "ID trace :" + id)
-
-            if (id != null && text != null) {
-                //On créer une note pour pour pouvoir l'ajouter à la liste de notes
-                var note = Note(id, text)
-                addNote(note)
-            }
-
         }
 
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = "Mes notes"
     }
 
     private fun deleteNote (position : Int) {
         Notes.removeAt(position)
+        //On appel une fonction du Manager qui va supprimer la Note du cache
+        PreferenceManager.saveAfterRemove(this, position)
         adapter.notifyItemRemoved(position)
     }
 
-    private fun addNote(note: Note) {
-        Notes.add(note)
-        adapter.notifyDataSetChanged()//(Notes.size - 1)
+    override fun onResume() {
+        super.onResume()
+        Notes.clear()
+        //On récupère la liste des notes dans le cache grâce à une méthode centralisé du manager
+        Notes.addAll(PreferenceManager.retrieve(this))
+        adapter.notifyDataSetChanged()
     }
 }

@@ -3,23 +3,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="70dp">
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/deleteNoteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:clickable="true"
-        app:layout_constraintStart_toEndOf="@+id/noteVisualisationButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+    android:layout_height="wrap_content"
+    android:padding="16dp">
 
     <Button
         android:id="@+id/noteVisualisationButton"
+        android:layout_width="240dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="8dp"
+        android:text="Visualize Note"
+        android:background="@drawable/button_square"
+        android:elevation="4dp"
+        android:textColor="@color/purple"
+        app:backgroundTint="@color/light_purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/deleteNoteButton"
+        android:layout_width="52dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="delete_note"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/white"
+        app:layout_constraintStart_toEndOf="@id/noteVisualisationButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
+    <TextView
+        android:id="@+id/noteCreationDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_marginTop="8dp"
+        android:text="Created: 01/01/2021"
+    app:layout_constraintStart_toStartOf="@id/noteVisualisationButton"
+    app:layout_constraintTop_toBottomOf="@id/noteVisualisationButton" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/noteCreationDate" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,20 +1,9 @@
 package com.example.controledelannepass
 
-class Note {
-   public lateinit var id :String
-   public lateinit var text :String
+import java.util.Date
 
-   //Constructeur pour des notes existantes
-    constructor(id:String , text:String){
-        this.id = id
-        this.text = text
-    }
-
-    //Constructeur vide pour la création d'une nouvelle note
-    constructor(){
-        this.id = ""
-        this.text = ""
-    }
-
+//La classe est vide car il n'y a pas de traitements
+class Note
+    (var id: String, var text: String, var creationDate: Date) {
 
 }

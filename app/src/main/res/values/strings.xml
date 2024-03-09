@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Controle de  l\'année passé</string>
+    <string name="app_name">Mes notes</string>
+    <string name="created_on">Created: %s</string>
 </resources>
