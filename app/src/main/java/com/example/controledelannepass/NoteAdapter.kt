@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Filter
-import android.widget.Filterable
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.graphics.red
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -22,7 +24,7 @@ class NoteAdapter(
     private val context: Context,
     private val deleteNote: (Int) -> Unit,
 
-) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
+    ) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -34,6 +36,9 @@ class NoteAdapter(
 
         // Optimisation pour éviter de multiples appels findViewById
         val noteCreationDate: TextView = itemView.findViewById(R.id.noteCreationDate)
+        val cardView: CardView = itemView.findViewById(R.id.cardView)
+
+        val checkBox_important: CheckBox = itemView.findViewById(R.id.checkBox_important)
 
     }
 
@@ -83,6 +88,21 @@ class NoteAdapter(
                 putExtra("position", position)
             }
             startActivity(context, intent, null)
+        }
+
+        holder.checkBox_important.setOnCheckedChangeListener { _, isChecked ->
+            note.isImportant = isChecked
+            notifyItemChanged(position)
+        }
+        if (note.isImportant) {
+            // Change button color to red and set the important icon
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.red))
+
+        } else {
+            // Reset to default appearance when note is not important
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white))
+
+
         }
     }
 
