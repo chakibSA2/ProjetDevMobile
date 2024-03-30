@@ -11,6 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class MainActivity : AppCompatActivity() {
     // récuperation des notes existantes pour les afficher dans le recycler
     private val Notes = mutableListOf<Note>()
+
     //On instancie l'adapter en tant que variable de l'activité pour l'utiliser dans les fonctions
     private lateinit var adapter: NoteAdapter
 
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val recycler = findViewById<RecyclerView>(R.id.recyclerMainActivity)
 
         //initialisation de l'adapter, on lui donne cet activité comme context
-        adapter = NoteAdapter(Notes, this) { position ->
+        adapter = NoteAdapter(Notes,this) { position ->
             deleteNote(position)
         }
 
@@ -40,9 +41,12 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Mes notes"
+
+
     }
 
-    private fun deleteNote (position : Int) {
+
+    private fun deleteNote(position: Int) {
         Notes.removeAt(position)
         //On appel une fonction du Manager qui va supprimer la Note du cache
         PreferenceManager.saveAfterRemove(this, position)

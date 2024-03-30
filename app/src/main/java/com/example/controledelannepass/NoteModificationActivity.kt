@@ -39,7 +39,7 @@ class NoteModificationActivity : AppCompatActivity() {
                 id = "note 1"
             }
 
-            val note = Note(id, text, Date())
+            val note = Note(id, text, Date(),false)
 
             //Si position = -1 c'est qu'on ajoute une nouvelle Note, le manager a donc des fonctions de sauvegarde
             //différentes pour les deux cas. Mais la sauveguarde ce fait directement dans le cache.

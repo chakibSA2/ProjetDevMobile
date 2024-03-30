@@ -1,53 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/noteVisualisationButton"
-        android:layout_width="240dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="8dp"
-        android:text="Visualize Note"
-        android:background="@drawable/button_square"
-        android:elevation="4dp"
-        android:textColor="@color/purple"
-        app:backgroundTint="@color/light_purple"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/deleteNoteButton"
-        android:layout_width="52dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="delete_note"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/white"
-        app:layout_constraintStart_toEndOf="@id/noteVisualisationButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
-
-    <TextView
-        android:id="@+id/noteCreationDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Created: 01/01/2021"
-    app:layout_constraintStart_toStartOf="@id/noteVisualisationButton"
-    app:layout_constraintTop_toBottomOf="@id/noteVisualisationButton" />
-
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
+    <GridLayout
+        android:layout_width="398dp"
+        android:layout_height="154dp"
+        android:alignmentMode="alignMargins"
+        android:columnCount="3"
+        android:columnOrderPreserved="false"
+        android:rowCount="3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/noteCreationDate" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="1124dp"
+            android:layout_height="154dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <RelativeLayout
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/pinNoteButton"
+                    android:layout_width="52dp"
+                    android:layout_height="51dp"
+                    android:backgroundTint="@color/white"
+                    android:contentDescription="pinIcone"
+                    />
+                <Button
+                    android:id="@+id/noteVisualisationButton"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/button_square"
+                    android:elevation="4dp"
+                    android:text="Visualize Note"
+                    android:textColor="@color/purple"
+                    app:backgroundTint="@color/light_purple" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/deleteNoteButton"
+                    android:layout_width="52dp"
+                    android:layout_height="51dp"
+                    android:layout_alignParentEnd="true"
+                    android:backgroundTint="@color/white"
+                    android:contentDescription="delete_note"
+                    app:srcCompat="@android:drawable/ic_menu_delete" />
+
+                <TextView
+                    android:id="@+id/noteCreationDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/noteVisualisationButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:text="Created: 01/01/2021" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/noteCreationDate"
+                    android:layout_marginTop="17dp" />
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
